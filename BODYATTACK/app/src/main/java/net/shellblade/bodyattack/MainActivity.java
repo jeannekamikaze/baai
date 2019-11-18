@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Percent of music volume to decrease when the wake word is detected.
     // The volume is then increased by the same amount when the session ends.
-    private static final float WAKE_WORD_VOLUME_DROP = 0.15f;
+    private static final float WAKE_WORD_VOLUME_DROP = 0.30f;
 
     private BAAssistant assistant;
     private MusicPlayer musicPlayer;
