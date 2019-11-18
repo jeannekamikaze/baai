@@ -50,8 +50,12 @@ public class BAAssistant {
         configureClient(client);
     }
 
-    public void Start(Context context) {
+    public void start(Context context) {
         client.connect(context);
+    }
+
+    public void release() {
+        client.disconnect();
     }
 
     private void configureClient(final SnipsPlatformClient client) {

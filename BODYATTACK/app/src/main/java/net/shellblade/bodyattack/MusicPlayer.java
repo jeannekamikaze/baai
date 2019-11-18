@@ -28,7 +28,7 @@ public class MusicPlayer {
     private static final Pattern MATCH_BODYATTACK_RELEASE = Pattern.compile("BODYATTACK ([0-9]+)\\/[a-zA-Z]*\\s*([0-9]+)");
 
     private final Context context;
-    private final MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     private int currentRelease = -1;
     private int currentTrack = 1;
@@ -49,6 +49,14 @@ public class MusicPlayer {
 
         buildSongDatabase();
         currentRelease = getLatestRelease();
+    }
+
+    public void release() {
+        if (mediaPlayer != null) {
+            mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     public void playRelease(int release) {
@@ -180,6 +188,7 @@ public class MusicPlayer {
     }
 
     private void playSongFromStart() throws IOException {
+        mediaPlayer.stop();
         mediaPlayer.reset();
         mediaPlayer.setDataSource(getCurrentTrackFilePath());
         mediaPlayer.prepare();

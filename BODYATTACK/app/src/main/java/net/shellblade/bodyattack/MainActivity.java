@@ -73,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onDestroy() {
+        stopApp();
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -158,6 +164,21 @@ public class MainActivity extends AppCompatActivity {
         musicPlayer = startMusicPlayer(assistant);
     }
 
+    private void stopApp() {
+        // Release the music player and assistant when the application is destroyed.
+        // Otherwise, two or more Snips sessions can be active when the application is recreated,
+        // which them causes the application to play the same song multiple times simultaneously
+        // (one per instance).
+        if (musicPlayer != null) {
+            musicPlayer.release();
+            musicPlayer = null;
+        }
+        if (assistant != null) {
+            assistant.release();
+            assistant = null;
+        }
+    }
+
     private BAAssistant startAssistant() {
         Log.i(TAG, "Starting snips");
         try {
@@ -168,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
             File assistantLocation = new File(getFilesDir(), SNIPS_DIRECTORY);
             SnipsPlatformClient client = Snips.createClient(assistantZipFile, assistantLocation);
             BAAssistant assistant = new BAAssistant(client);
-            assistant.Start(this.getApplicationContext());
+            assistant.start(this.getApplicationContext());
             Log.i(TAG, "Snips started successfully!");
             return assistant;
         }
