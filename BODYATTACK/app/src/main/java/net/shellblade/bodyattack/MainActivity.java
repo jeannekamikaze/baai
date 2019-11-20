@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Percent of music volume to decrease when the wake word is detected.
     // The volume is then increased by the same amount when the session ends.
-    private static final float WAKE_WORD_VOLUME_DROP = 0.30f;
+    private static final float WAKE_WORD_VOLUME_DROP = 0.55f;
 
     private BAAssistant assistant;
     private MusicPlayer musicPlayer;
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         assistant.setStartOverCallback(() -> musicPlayer.startOver());
 
         assistant.setOnWakeWordDetected(() -> musicPlayer.decreaseVolumeRelative(WAKE_WORD_VOLUME_DROP));
-        assistant.setOnSessionEnded(() -> musicPlayer.increaseVolumeRelative(WAKE_WORD_VOLUME_DROP));
+        assistant.setOnSessionEnded(() -> musicPlayer.setVolume(1.0f));
 
         Log.i(TAG, "Music player started successfully");
         return musicPlayer;

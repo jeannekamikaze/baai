@@ -29,6 +29,7 @@ public class MusicPlayer {
 
     private final Context context;
     private MediaPlayer mediaPlayer;
+    private float volume = 1.0f;
 
     private int currentRelease = -1;
     private int currentTrack = 1;
@@ -106,55 +107,29 @@ public class MusicPlayer {
     }
 
     public void setVolume(float percent) {
-        setVolume((int)(percent * (float)getStreamMaxVolume()));
+        volume = Math.max(0.0f, Math.min(1.0f, percent));
+        mediaPlayer.setVolume(volume, volume);
+        Log.d(TAG, "Volume: " + volume + "%");
     }
 
-    /// Increase the volume relative to the device's max volume.
+    /// Increase the volume.
     public void increaseVolume(float percent) {
-        int newVolume = getStreamVolume() + (int)((float)getStreamMaxVolume() * percent);
-        setVolume(newVolume);
+        setVolume(volume + percent);
     }
 
-    /// Decrease the volume relative to the device's max volume.
+    /// Decrease the volume.
     public void decreaseVolume(float percent) {
-        int newVolume = getStreamVolume() - (int)((float)getStreamMaxVolume() * percent);
-        setVolume(newVolume);
+        setVolume(volume - percent);
     }
 
     /// Increase the volume relative to the current volume.
     public void increaseVolumeRelative(float percent) {
-        int currentVolume = getStreamVolume();
-        int newVolume = currentVolume + Math.min(1, (int)((float)currentVolume * (1.0f + percent)));
-        setVolume(newVolume);
+        setVolume(volume + volume*percent);
     }
 
     /// Decrease the volume relative to the current volume.
     public void decreaseVolumeRelative(float percent) {
-        int currentVolume = getStreamVolume();
-        int newVolume = currentVolume - Math.min(1, (int)((float)currentVolume * (1.0f + percent)));
-        setVolume(newVolume);
-    }
-
-    private void setVolume(int volume) {
-        AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        volume = Math.max(0, Math.min(maxVolume, volume));
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
-        Log.d(TAG, "Volume: " + volume + ", percent: " + getStreamVolumePercent() * 100 + "%");
-    }
-
-    private int getStreamVolume() {
-        AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        return audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-    }
-
-    private int getStreamMaxVolume() {
-        AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        return audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-    }
-
-    private float getStreamVolumePercent() {
-        return (float)getStreamVolume() / (float)getStreamMaxVolume();
+        setVolume(volume - volume*percent);
     }
 
     private void tryPlayReleaseAndTrack(int release, int track) {
