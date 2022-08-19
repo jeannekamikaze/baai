@@ -4,7 +4,7 @@ BODYATTACK voice assistant
 
 ## Commands
 
-### Song coommands
+### Song commands
 
 - Play mix `release number`
 - Play BODYATTACK `release number`
