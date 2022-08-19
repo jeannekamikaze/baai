@@ -4,6 +4,10 @@ BODYATTACK voice assistant
 
 ## Commands
 
+Each command must be preceded by the wake word.
+
+Wake word: `Hey, Snips`
+
 ### Song commands
 
 - Play mix `release number`
@@ -20,3 +24,7 @@ BODYATTACK voice assistant
 - Volume up/down
 - Volume up/down by `x` percent
 - Volume on / off
+
+## TODO
+
+Sadly, Snips AI has been acquired by Sonos and they appear to have closed shop. I am again in shop for a voice recon that works embedded and offline.
