@@ -6,11 +6,11 @@ BODYATTACK voice assistant
 
 ### Song coommands
 
-- Play mix `number`
-- Play BODYATTACK `release`
-- Play `release` track `number`
-- Play `release`
-- Play track `number`
+- Play mix `release number`
+- Play BODYATTACK `release number`
+- Play `release number` track `track number`
+- Play `release number`
+- Play track `track number`
 - Play next/previous song
 - Restart / rewind / start over / from the top
 - Play / stop music
