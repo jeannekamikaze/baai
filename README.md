@@ -1,3 +1,5 @@
+<img width="35" height="35" align="left" style="float: left; margin: 0 10px 0 0;" alt="BODYATTACK AI logo"  src="BODYATTACK/app/src/main/res/drawable/baai_logo.png">
+
 # BODYATTACK AI
 
 BODYATTACK voice assistant
