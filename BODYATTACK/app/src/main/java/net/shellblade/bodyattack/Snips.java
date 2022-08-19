@@ -23,7 +23,7 @@ public class Snips {
             .enableDialogue(true)
             .enableHotword(true)
             .enableSnipsWatchHtml(false)
-            .withHotwordSensitivity(0.5f)
+            .withHotwordSensitivity(0.6f)
             .enableStreaming(false)
             .enableInjection(false)
             .enableLogs(true)

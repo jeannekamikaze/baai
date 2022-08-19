@@ -147,9 +147,11 @@ public class MusicPlayer {
     private boolean trySetReleaseAndTrack(int release, int track) {
         HashMap<Integer, String> trackMap = songDatabase.get(release);
         if (trackMap == null) {
+            Log.d(TAG, "No track map for release " + release);
             return false;
         }
         if (trackMap.get(track) == null) {
+            Log.d(TAG, "No track " + track + " for release " + release);
             return false;
         }
 
@@ -163,17 +165,21 @@ public class MusicPlayer {
     }
 
     private void playSongFromStart() throws IOException {
+        String songFilePath = getCurrentTrackFilePath();
         mediaPlayer.stop();
         mediaPlayer.reset();
-        mediaPlayer.setDataSource(getCurrentTrackFilePath());
+        mediaPlayer.setDataSource(songFilePath);
         mediaPlayer.prepare();
         mediaPlayer.start();
+        Log.d(TAG, "Playing track: " + songFilePath);
     }
 
     private int getLatestRelease() {
         return -1; // TODO: implement this
     }
 
+    // TODO: DATA in MediaColumns has been deprecated.
+    @SuppressWarnings("deprecation")
     private void buildSongDatabase() {
         Log.d(TAG, "Building song database");
 
@@ -213,7 +219,6 @@ public class MusicPlayer {
             for (HashMap.Entry<Integer, String> track : release.getValue().entrySet()) {
                 Log.d(TAG, "Release: " + release.getKey() + ", track: " + track.getKey() + ", file path: " + track.getValue());
             }
-
         }
     }
 }
