@@ -8,11 +8,12 @@ android {
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
+        archivesBaseName = "BODYATTACK-AI-" + versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
