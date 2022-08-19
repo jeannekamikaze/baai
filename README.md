@@ -1,4 +1,4 @@
-<img width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0;" alt="BODYATTACK AI logo"  src="BODYATTACK/app/src/main/res/drawable/baai_logo.png">
+<img width="120" height="120" align="left" style="float: left; margin: 0 10px 0 0;" alt="BODYATTACK AI logo"  src="BODYATTACK/app/src/main/res/drawable/baai_logo.png">
 
 # BODYATTACK AI
 
